@@ -5,7 +5,7 @@ from datetime import datetime
 
 class PostList(ListView):
     model = Post
-    template_name = 'flatpages/news.html'
+    template_name = 'flatpages/News.html'
     context_object_name = 'news'
     queryset = Post.objects.order_by('-dateCreation')
 
@@ -18,5 +18,5 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'flatpages/post.html'
+    template_name = 'flatpages/Post.html'
     context_object_name = 'post'
