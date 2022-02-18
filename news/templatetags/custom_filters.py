@@ -4,7 +4,7 @@ from django import template
 register = template.Library()
 
 
-censor_list = ['Идиот>', 'Тупица', 'Дурак']
+censor_list = ['Идиот', 'Тупица', 'Дурак']
 
 
 @register.filter(name='censor')

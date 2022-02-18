@@ -3,11 +3,11 @@
 {% load custom_filters %}
 
 {% block title %}
-News
+Новости
 {% endblock title %}
 
 {% block content %}
-    <h1>News</h1>
+    <h1>Новости</h1>
     <h3>{{ time_now|date:'d-M-Y H:m' }}</h3>
     {% if news %}
     <table>
@@ -17,6 +17,9 @@ News
             </td>
             <td>
                 Дата публикации
+            </td>
+            <td>
+                Автор
             </td>
             <td>
                 Категория
@@ -32,6 +35,9 @@ News
             </td>
             <td>
                 {{ news.dateCreation|date:'d-M-Y H:m' }}
+            </td>
+            <td>
+                {{ news.author.authorUser.username }}
             </td>
             <td>
                 {{ news.categoryType }}
