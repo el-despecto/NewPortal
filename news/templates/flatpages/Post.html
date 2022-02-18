@@ -3,40 +3,46 @@
 {% load custom_filters %}
 
 {% block title %}
-Post
+Публикации
 {% endblock title %}
 
 {% block content %}
-    <h1>Пост</h1>
-    {% if post %}
+    <h1>Публикация №1</h1>
+    {% if news %}
     <table>
         <tr>
             <td>
-                Заголовок
+                <h4>Заголовок</h4>
             </td>
             <td>
-                Дата публикации
+                 <h4>Автор </h4>
             </td>
             <td>
-                Категория
+                 <h4>Дата публикации </h4>
             </td>
             <td>
-                Текст
+                 <h4>Категория </h4>
+            </td>
+            <td>
+                 <h4>Текст </h4>
             </td>
          </tr>
 
         <tr>
             <td>
-                {{ post.title|censor }}
+                {{ news.title|censor }}
             </td>
             <td>
-                {{ post.dateCreation|date:'d-M-Y H:m' }}
+                {{ news.author.authorUser.username }}
             </td>
             <td>
-                {{ post.categoryType }}
+                {{ news.dateCreation|date:'d-M-Y H:m' }}
             </td>
             <td>
-                {{ post.text|censor }}
+                {{ news.get_categoryType_display }}
+            </td>
+            <td>
+                {{ news.text|censor }}
             </td>
         </tr>
     </table>

@@ -13,19 +13,16 @@
     <table>
         <tr>
             <td>
-                Заголовок
+                 <h4>Заголовок </h4>
             </td>
             <td>
-                Дата публикации
+                 <h4>Дата публикации </h4>
             </td>
             <td>
-                Автор
+                <h4>Категория</h4>
             </td>
             <td>
-                Категория
-            </td>
-            <td>
-                Текст
+                <h4>Текст</h4>
             </td>
          </tr>
     {% for news in news %}
@@ -35,9 +32,6 @@
             </td>
             <td>
                 {{ news.dateCreation|date:'d-M-Y H:m' }}
-            </td>
-            <td>
-                {{ news.author.authorUser.username }}
             </td>
             <td>
                 {{ news.get_categoryType_display }}
