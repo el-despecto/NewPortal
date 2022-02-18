@@ -40,7 +40,7 @@
                 {{ news.author.authorUser.username }}
             </td>
             <td>
-                {{ news.categoryType }}
+                {{ news.get_categoryType_display }}
             </td>
             <td>
                 {{ news.text|truncatechars:50|censor }}
