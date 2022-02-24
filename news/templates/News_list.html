@@ -16,29 +16,29 @@
     <input type="submit" value="Найти">
 </form>
     <table>
-        <tr>
-            <td>
+        <thead>
+            <th>
                 <h4>Заголовок</h4>
-            </td>
-            <td>
+            </th>
+            <th>
                  <h4>Автор </h4>
-            </td>
-            <td>
+            </th>
+            <th>
                  <h4>Дата публикации </h4>
-            </td>
-            <td>
+            </th>
+            <th>
                  <h4>Категория </h4>
-            </td>
-            <td>
+            </th>
+            <th>
                  <h4>Текст </h4>
-            </td>
-         </tr>
-<hr>
-        {% for news in filter.qs %}
+            </th>
+        </thead>
+   {% for news in filter.qs %}
         <tr>
             <td>
-                 <a href="{% url 'post_detail' news.id %}">{{ news.title|censor }} </a>
+                <a href="{% url 'post_detail' news.id %}">{{ news.title|truncatechars:50|censor }} </a>
                 <a href="{% url 'post_update' news.id %}"><u>Редактировать</u></a>
+
                 <a href="{% url 'post_delete' news.id %}"><u> Удалить </u></a>
             </td>
             <td>
@@ -51,7 +51,7 @@
                 {{ news.get_categoryType_display }}
             </td>
             <td>
-                {{ news.text|censor }}
+                {{ news.text|truncatechars:50|censor }}
             </td>
         </tr>
     </table>
