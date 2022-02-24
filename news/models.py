@@ -50,6 +50,8 @@ class Post(models.Model):
     def preview(self):
         return self.text[0:123] + '...'
 
+    def get_absolute_url(self):
+        return f'/news/{self.id}'
 
 class PostCategory(models.Model):
     postThrough = models.ForeignKey(Post, on_delete=models.CASCADE) #связь «один ко многим» с моделью Post;

@@ -9,6 +9,7 @@
 {% block content %}
     <h1>Новости</h1>
     <h3>{{ time_now|date:'d-M-Y H:m' }}</h3>
+<hr>
     {% if news %}
     <table>
         <tr>
@@ -28,7 +29,7 @@
     {% for news in news %}
         <tr>
             <td>
-                {{ news.title|censor }}
+                &nbsp;<a class="reference internal" href="http://127.0.0.1:8000/news/2"><span class="std std-ref">{{ news.title|censor }} </span></a>&nbsp;
             </td>
             <td>
                 {{ news.dateCreation|date:'d-M-Y H:m' }}
