@@ -1,15 +1,15 @@
-from django_filters import FilterSet  # импортируем filterset, чем-то напоминающий знакомые дженерики
+from django_filters import FilterSet
 from .models import Post
 
 
-# создаём фильтр
+
 class PostFilter(FilterSet):
-    # Здесь в мета классе надо предоставить модель и указать поля, по которым будет фильтроваться (т. е. подбираться) информация о товарах
+
     class Meta:
         model = Post
         fields = {
-            'title': ['icontains'],  # мы хотим чтобы нам выводило имя хотя бы отдалённо похожее на то что запросил пользователь
-            'author': ['in'],  # цена должна быть меньше или равна тому, что указал пользователь
-            'dateCreation': ['date'],  # количество товаров должно быть больше или равно тому, что указал пользователь
-            'rating_post': ['lt'],  # цена должна быть меньше или равна тому, что указал пользователь
+            'title': ['icontains'],
+            'author': ['in'],
+            'dateCreation': ['date'],
+            'rating_post': ['lt'],
         }

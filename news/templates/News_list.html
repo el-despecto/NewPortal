@@ -16,29 +16,29 @@
     <input type="submit" value="Найти">
 </form>
     <table>
-        <thead>
-            <th>
+        <tr>
+            <td>
                 <h4>Заголовок</h4>
-            </th>
-            <th>
+            </td>
+            <td>
                  <h4>Автор </h4>
-            </th>
-            <th>
+            </td>
+            <td>
                  <h4>Дата публикации </h4>
-            </th>
-            <th>
+            </td>
+            <td>
                  <h4>Категория </h4>
-            </th>
-            <th>
+            </td>
+            <td>
                  <h4>Текст </h4>
-            </th>
-        </thead>
+            </td>
+         </tr>
+<hr>
    {% for news in filter.qs %}
         <tr>
             <td>
-                <a href="{% url 'post_detail' news.id %}">{{ news.title|truncatechars:50|censor }} </a>
+                <a href="{% url 'post_detail' news.id %}"><u>{{ news.title|truncatechars:50|censor }}</u> </a>
                 <a href="{% url 'post_update' news.id %}"><u>Редактировать</u></a>
-
                 <a href="{% url 'post_delete' news.id %}"><u> Удалить </u></a>
             </td>
             <td>
@@ -55,14 +55,13 @@
             </td>
         </tr>
     </table>
-
     {% endfor %}
     {% else %}
         <h1>Новостей нет!</h1>
     {% endif %}
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
-
+<hr>
     {% if page_obj.has_previous %}
         <a href="?page=1">First</a>
         <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
@@ -80,6 +79,5 @@
         <a href="?page={{ page_obj.next_page_number }}">>>></a>
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
-
 {% endif %}
 {% endblock content %}

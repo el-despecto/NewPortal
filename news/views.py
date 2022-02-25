@@ -24,8 +24,9 @@ class PostList(ListView):
 
 
 class PostDetailView(DetailView):
+    model = Post
     template_name = 'details/post_detail.html'
-    queryset = Post.objects.all()
+    context_object_name = 'news'
 
 class PostCreateView(CreateView):
     template_name = 'details/post_create.html'
@@ -45,8 +46,9 @@ class PostUpdateView(UpdateView):
 
 # дженерик для удаления товара
 class PostDeleteView(DeleteView):
+    model = Post
     template_name = 'details/post_delete.html'
-    queryset = Post.objects.all()
+    context_object_name = 'news'
     success_url = '/news/'
 
 #class CommentList(ListView):
