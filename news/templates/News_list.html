@@ -59,8 +59,7 @@
     {% else %}
         <h1>Новостей нет!</h1>
     {% endif %}
-<hr>
-<a href="{% url 'post_create' %}">Добавить публикацию</a> <br>
+
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
 <hr>
@@ -81,5 +80,8 @@
         <a href="?page={{ page_obj.next_page_number }}">>>></a>
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
+<hr>
+<a href="{% url 'post_create' %}">Добавить публикацию</a> <br>
 {% endif %}
+
 {% endblock content %}
