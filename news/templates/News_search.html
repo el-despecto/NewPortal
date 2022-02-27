@@ -10,8 +10,10 @@
     <h1>Новости</h1>
     <h3>{{ time_now|date:'d-M-Y H:m' }}</h3>
     {% if news %}
-<hr>
-<h4><a  href="{% url 'news_search' %}">Поиск новостей</a> </h4>
+<!-- Перед таблицей добавим форму для поиска -->
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Найти">
 </form>
     <table>
         <tr>
