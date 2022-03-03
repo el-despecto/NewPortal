@@ -7,13 +7,11 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Новости</h1>
+    <h1>Страница авторизованного пользователя {{request.user.username}}</h1> <button> <a href="sign/logout/">Выйти</a> </button>
     <h3>{{ time_now|date:'d-M-Y H:m' }}</h3>
     {% if news %}
-<!-- Перед таблицей добавим форму для поиска -->
-<form method="GET">
-    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
-    <input type="submit" value="Найти">
+<hr>
+<h4><a  href="{% url 'news_search' %}">Поиск новостей</a> </h4>
 </form>
     <table>
         <tr>
@@ -34,10 +32,12 @@
             </td>
          </tr>
 <hr>
-        {% for news in filter.qs %}
+   {% for news in filter.qs %}
         <tr>
             <td>
-                {{ news.title|censor }}
+                <a href="{% url 'post_detail' news.id %}"><u>{{ news.title|truncatechars:50|censor }}</u> </a>
+                <a href="{% url 'post_update' news.id %}"><u>Редактировать</u></a>
+                <a href="{% url 'post_delete' news.id %}"><u> Удалить </u></a>
             </td>
             <td>
                 {{ news.author.authorUser.username }}
@@ -49,25 +49,23 @@
                 {{ news.get_categoryType_display }}
             </td>
             <td>
-                {{ news.text|censor }}
+                {{ news.text|truncatechars:50|censor }}
             </td>
         </tr>
-    {% endfor %}
     </table>
-
+    {% endfor %}
     {% else %}
         <h1>Новостей нет!</h1>
     {% endif %}
+
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
-
-    <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
+<hr>
     {% if page_obj.has_previous %}
         <a href="?page=1">First</a>
         <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
     {% endif %}
 
-    <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
     {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
             <a>{{ num }}</a>
@@ -76,34 +74,12 @@
         {% endif %}
     {% endfor %}
 
-    <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
     {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">>>></a>
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
-    {% else %}
-        <h1>Новостей нет!</h1>
+<hr>
+<a href="{% url 'post_create' %}">Добавить публикацию</a> <br>
 {% endif %}
-<form method="POST">
-    {% csrf_token %}
-    <label for="title">Title</label>
-    <input title="title" type="text">
 
-    <label for="text">Text</label>
-    <input text="text" type="text">
-
-    <label for="author">Author</label>
-    <input author="author" min="0">
-
-    <!-- Здесь будет список категорий.  -->
-    <select name="category" size="4">
-
-      {% for category in categories %}
-        <option value="{{ category.id }}">
-            {{ category.name }}
-        </option>
-      {% endfor %}
-    </select>
-    <input type="submit" value="Добавить новость">
-</form>
 {% endblock content %}
