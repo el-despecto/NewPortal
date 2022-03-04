@@ -64,6 +64,19 @@ class PostDeleteView(DeleteView):
     context_object_name = 'news'
     success_url = '/news/'
 
+class PostEdit(ListView):
+    model = Post
+    template_name = 'News_edit.html'
+    context_object_name = 'news'
+    queryset = Post.objects.order_by('-dateCreation')
+    paginate_by = 1  # поставим постраничный вывод в один элемент
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())  # вписываем наш фильтр в контекст
+        context['time_now'] = datetime.utcnow()
+        context['value1'] = None
+        return context
 #class CommentList(ListView):
  #   model = Comment
   #  template_name = 'flatpages/News.html'

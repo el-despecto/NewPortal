@@ -12,6 +12,7 @@
     {% if news %}
 <hr>
 <h4><a  href="{% url 'news_search' %}">Поиск новостей</a> </h4>
+<h4><a  href="{% url 'post_create' %}">Добавить публикацию</a> </h4>
 </form>
     <table>
         <tr>
@@ -36,6 +37,8 @@
         <tr>
             <td>
                 <a href="{% url 'post_detail' news.id %}"><u>{{ news.title|truncatechars:50|censor }}</u> </a>
+                <a href="{% url 'post_update' news.id %}"><u>Редактировать</u></a>
+                <a href="{% url 'post_delete' news.id %}"><u> Удалить </u></a>
             </td>
             <td>
                 {{ news.author.authorUser.username }}

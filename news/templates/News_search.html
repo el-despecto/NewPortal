@@ -38,8 +38,6 @@
         <tr>
             <td>
                 <a href="{% url 'post_detail' news.id %}"><u>{{ news.title|truncatechars:50|censor }}</u> </a>
-                <a href="{% url 'post_update' news.id %}"><u>Редактировать</u></a>
-                <a href="{% url 'post_delete' news.id %}"><u> Удалить </u></a>
             </td>
             <td>
                 {{ news.author.authorUser.username }}
@@ -80,8 +78,6 @@
         <a href="?page={{ page_obj.next_page_number }}">>>></a>
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
-<hr>
-<a href="{% url 'post_create' %}">Добавить публикацию</a> <br>
 {% endif %}
 
 {% endblock content %}
